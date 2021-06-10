@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic registration page</title>
+        <link href="../today task/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="registration">
+                <h1>Registration Page</h1>
+                <form>
+                    <div class="firstname">
+                        <label>First Name</label>
+                        <input type="text" id="fname" placeholder="Firstname"><br><br>
+                        <span id="fnameerr" style="color: red"></span>
+                    </div>
+                    <div class="lastname">
+                        <label>Last Name</label>
+                        <input type="text" id="lname" placeholder="Lastname"><br><br>
+                        <span id="lnameerr" style="color: red"></span>
+                    </div>
+                    <div class="gender">
+                        <label>Gender:</label>
+                        <label>Male</label>
+                        <input type="radio" id="gender">
+                        <label>Female</label>
+                        <input type="radio" id="gender"><br><br>
+                        <span id="gendererr" style="color: red"></span>
+                    </div>
+                    <div class="dob">
+                        <label>Date Of Birth:</label>
+                        <input type="date" id="dob" ><br><br>
+                        <span id="doberr" style="color: red"></span>
+                    </div>
+                    <div class="qual">
+                        <label>Qualifications:</label><br>  
+                        <label>B.Tech</label>
+                        <input type="checkbox" id="qual">
+                        <label>B.com</label>
+                        <input type="checkbox" id="qual">
+                        <label>12th</label>
+                        <input type="checkbox" id="qual">
+                        <span id="qualificationerr" style="color: red"></span>
+                    </div>
+                    <div class="submitbutton">
+                        <button id="submit" type="button" onclick="registrationform()">submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            
+            function printError(elemId, hintMsg) {
+                document.getElementById(elemId).innerHTML = hintMsg;
+            }
+            function registrationform(){
+                // var xname = document.contactForms.fname.value;
+            var xname=document.getElementById("fname");
+            var yname=document.getElementById("lname");
+            var gender=document.getElementById("gender");
+            var date=document.getElementById("dob");
+            var qualifications=document.getElementById("qual");
+
+
+            //error messages
+            var fnameerr=lnameerr=gendererr=doberr=qualificationerr=true;
+            
+            // first name validation
+                if(xname=""){
+                    printError("fnameerr","enter your name");
+                    }else{
+                    var regex = /^[a-zA-Z ]{2,30}$/;
+                    if(regex.test(xname)===false){
+                        printError("fnameerr","please enter a valid name");
+                    }else{
+                        printError("fnameerr","");
+                        fnameerr="false";
+                    }
+                }
+
+             // last name validation
+                if(yname=""){
+                    printError("lnameerr","enter last name");
+                }else{
+                    var regex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+                    if(regex.test(yname)===false){
+                        printError("lnameerr","please enter valid last name");
+                    }else{
+                        printError("lnameerr","");
+                        lnameerr="false";
+                    }
+                }
+                // gender validation
+                var hasSelected = [];
+                for(i = 0; i < gender.length; i++)
+                {
+                    if(gender[i].checked)
+                    {
+                        hasSelected.push(gender.value)
+                    }
+                }
+                if(hasSelected.length == 0){
+                    printError("gendererr", "Please Select at least one of the options.");
+                }else{
+                    printError("gendererr", "");
+                    genderError = false;
+                }
+                	//Qualification Validation
+                var hasChecked = [];
+                for(i = 0; i < qualifications.length; i++)
+                {
+                    if(qualifications[i].checked)
+                    {
+                        hasChecked.push(qualifications.value)
+                    }
+                }
+                if(hasChecked.length == 0){
+                    printError("qualificationerr", "Please check at least one of the options.");
+                }else{
+                    printError("qualificationerr", "");
+                    qualError = false;
+                }
+
+                //Date Validation
+                if(date == ""){
+                    printError("doberr", "Date field can't be blank");
+                }else{
+                    // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+                    var optimizedBirthday = date.replace(/-/g, "/");
+
+                    //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+                    var myBirthday = new Date(optimizedBirthday);
+
+                    // set current day on 01:00:00 hours GMT+0100 (CET)
+                    var currentDate = new Date().toJSON().slice(0,10)+' 01:00:00';
+
+                    // calculate age comparing current date and borthday
+                    var myAge = ~~((Date.now(currentDate) - myBirthday) / (31557600000));
+
+                    if(myAge < 18) {
+                        printError("doberr", "Enter valid date of Birth.");
+                        
+                    }else{
+                        printError("doberr", "");
+                        dateError = false;
+                        
+                    }
+                }
+
+            }
+        </script>
+    </body>
+</html> 

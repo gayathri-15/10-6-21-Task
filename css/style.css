@@ -1,0 +1,29 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.container{
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    background: pink;
+}
+.registration h1{
+    text-align: center;
+    color: salmon;
+    font-size: 50px;
+}
+.firstname,.lastname,.gender,.dob,.qual,.submitbutton{
+    text-align: center;
+}
+.firstname input,.lastname input,.dob input{
+    padding: 5px;
+}
+.submitbutton button{
+    margin: 20px 20px;
+    background: red;
+    color: white;
+    padding: 10px 15px 10px 15px;
+    border-radius: 20px;
+    font-size: 20px;
+}
